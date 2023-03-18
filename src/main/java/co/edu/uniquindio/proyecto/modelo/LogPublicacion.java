@@ -40,8 +40,7 @@ public class LogPublicacion implements Serializable {
 
 
     ///  enumeracion de estado
-    @ElementCollection
     @Column(nullable = false)
-    private List<Estado> estado;
+    private Estado estado;
 
 }
