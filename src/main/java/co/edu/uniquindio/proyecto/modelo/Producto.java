@@ -59,7 +59,7 @@ public class Producto implements Serializable {
 
     // crear tabla intermedia entre producto y usuario
     @ManyToMany
-    private List<Usuario> productoFavorito;
+    private List<Usuario> favorito;
 
 
     /// relacion con el producto
