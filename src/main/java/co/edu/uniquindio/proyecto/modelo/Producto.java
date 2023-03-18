@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.modelo;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,6 +13,7 @@ import java.util.Map;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@ToString
 public class Producto implements Serializable {
 
     @Id
@@ -33,7 +31,10 @@ public class Producto implements Serializable {
     private Float precio;
 
     @Column(nullable = false)
-    private String disponibilidad;
+    private int unidades;
+
+    @Column(nullable = false)
+    private LocalDateTime fechaCreacion;
 
     @Column(nullable = false)
     private LocalDateTime fechaLimite;
@@ -45,12 +46,10 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private Map<String, String> imagen;
 
-
     ///relacion con el usuario
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
-
 
 
     /// crear la tabla intermedia entre categoria y producto
@@ -59,8 +58,8 @@ public class Producto implements Serializable {
 
 
     // crear tabla intermedia entre producto y usuario
-    @ManyToMany(mappedBy = "productoFavorito")
-    private List<Usuario> usuarioFav;
+    @ManyToMany
+    private List<Usuario> productoFavorito;
 
 
     /// relacion con el producto

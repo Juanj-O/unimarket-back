@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 public class Comentario implements Serializable {
@@ -16,6 +17,8 @@ public class Comentario implements Serializable {
     @Column(nullable = false)
     private String descripcion;
 
+    @Column(nullable = false)
+    private LocalDateTime fechaCreacion;
 
     /// relacion con el producto
     @ManyToOne

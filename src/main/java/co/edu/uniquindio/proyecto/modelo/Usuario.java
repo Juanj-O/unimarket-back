@@ -18,7 +18,7 @@ public class Usuario implements Serializable {
     @Id
     @Column(length = 10)
     @EqualsAndHashCode.Include
-    private int cedula;
+    private String cedula;
 
     @Column(nullable = false)
     private String nombreCompleto;
@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
     private String email;
 
     @Column(nullable = false, length = 10)
-    private String contraseña;
+    private String contrasena;
 
     @Column(nullable = false)
     private boolean estado;
@@ -45,8 +45,9 @@ public class Usuario implements Serializable {
     private Ciudad ciudad;
 
     /// crear la tabla intermedia entre producto y usuario
-    @ManyToMany
-    private List<Producto> productoFavorito;
+    @ManyToMany(mappedBy = "productoFavorito")
+    private List<Producto> ProductoFav;
+
 
 
     /// relacion con producto
