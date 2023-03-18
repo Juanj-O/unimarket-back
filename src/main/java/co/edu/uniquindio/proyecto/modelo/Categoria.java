@@ -24,8 +24,6 @@ public class Categoria implements Serializable {
     @Column(nullable = false)
     private String nombre;
 
-
-
     // crear tabla intermedia entre categoria y producto
     @ManyToMany(mappedBy = "categoria")
     private List<Producto> producto;

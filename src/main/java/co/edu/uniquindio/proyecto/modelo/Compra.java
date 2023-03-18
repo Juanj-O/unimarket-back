@@ -27,9 +27,8 @@ public class Compra implements Serializable {
     private LocalDateTime fecha;
 
     ///  enumeracion de metodoPago
-    @ElementCollection
     @Column(nullable = false)
-    private List<MetodoPago> metodoPago;
+    private MetodoPago metodoPago;
 
     /// relacion con usuario
     @ManyToOne
