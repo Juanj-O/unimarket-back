@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-public class EmailServicio {
+public interface EmailServicio {
 
-    String enviarEmail(String asunto);
+    String enviarEmail(String asunto, String cuerpo, String para);
 }

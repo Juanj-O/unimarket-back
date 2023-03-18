@@ -21,7 +21,7 @@ public class Compra implements Serializable {
     private int codigo;
 
     @Column(nullable = false)
-    private Double Total;
+    private Double valorTotal;
 
     @Column(nullable = false)
     private LocalDateTime fecha;

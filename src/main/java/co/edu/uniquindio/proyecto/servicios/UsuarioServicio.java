@@ -6,9 +6,9 @@ public interface UsuarioServicio {
 
     int registarUsuario(UsuarioDTO usuarioDTO);
 
-    int actualizarUsuario(int cedula, UsuarioDTO usuarioDTO );
+    int actualizarUsuario(String cedula, UsuarioDTO usuarioDTO );
 
-    UsuarioDTO obtenerUsuarioCodigo(int cedula);
+    UsuarioDTO obtenerUsuarioCodigo(String cedula);
 
 
 }
