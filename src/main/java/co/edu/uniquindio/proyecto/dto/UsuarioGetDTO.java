@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UsuarioDTO {
+public class UsuarioGetDTO {
 
     private String cedula;
 
@@ -20,6 +21,4 @@ public class UsuarioDTO {
     private String direccion;
 
     private String email;
-
-    private String contrasena;
 }
