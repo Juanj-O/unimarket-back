@@ -1,7 +1,10 @@
 package co.edu.uniquindio.proyecto.dto;
 
+import co.edu.uniquindio.proyecto.modelo.Categoria;
+
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class ProductoGetDTO {
 
@@ -23,8 +26,8 @@ public class ProductoGetDTO {
 
     private String cedulaUsuario;
 
-    private List<String> imagenes;
+    private Map<String, String> imagenes;
 
-    private List<Integer> categorias;
+    private List<Categoria> categorias;
 
 }
