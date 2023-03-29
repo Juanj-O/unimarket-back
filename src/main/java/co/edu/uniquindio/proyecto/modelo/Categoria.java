@@ -7,26 +7,15 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Categoria implements Serializable {
 
+public enum Categoria{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private int codigo;
-
-    @Column(nullable = false)
-    private String nombre;
-
-    // crear tabla intermedia entre categoria y producto
-    @ManyToMany(mappedBy = "categoria")
-    private List<Producto> producto;
-
+    CELULARES,
+    COMPUTADORES,
+    ELECTRODOMESTICOS,
+    TELEVISORES,
+    VIDEOJUEGOS,
+    DEPORTE,
+    ACCESORIOS
 
 }

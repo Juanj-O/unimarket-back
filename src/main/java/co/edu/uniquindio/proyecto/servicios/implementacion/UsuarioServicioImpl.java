@@ -57,7 +57,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return convertir( obtener(cedula) );
     }
 
-    private Usuario obtener(String cedula) throws Exception{
+    public Usuario obtener(String cedula) throws Exception{
         Optional<Usuario> usuario = usuarioRepo.findById(cedula);
 
         if(usuario.isEmpty() ){

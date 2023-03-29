@@ -1,9 +1,18 @@
 package co.edu.uniquindio.proyecto.dto;
 
-import jakarta.persistence.Column;
+import co.edu.uniquindio.proyecto.modelo.Categoria;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
+import java.util.Map;
 
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class ProductoDTO {
 
     private String nombre;
@@ -16,8 +25,8 @@ public class ProductoDTO {
 
     private String cedulaUsuario;
 
-    private List<String> imagenes;
+    private Map<String, String> imagenes;
 
-    private List<Integer> categorias;
+    private List<Categoria> categorias;
 
 }

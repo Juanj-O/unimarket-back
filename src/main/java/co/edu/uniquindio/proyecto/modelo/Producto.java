@@ -53,7 +53,7 @@ public class Producto implements Serializable {
 
 
     /// crear la tabla intermedia entre categoria y producto
-    @ManyToMany
+    @ElementCollection
     private List<Categoria> categoria;
 
 
