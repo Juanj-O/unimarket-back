@@ -42,6 +42,8 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private boolean estado;
 
+
+    /// crea la tabla de las imagenes
     @ElementCollection
     @Column(nullable = false)
     private Map<String, String> imagen;
@@ -52,14 +54,14 @@ public class Producto implements Serializable {
     private Usuario usuario;
 
 
-    /// crear la tabla intermedia entre categoria y producto
+    /// crear la relacion entre la enum categoria y producto
     @ElementCollection
     private List<Categoria> categoria;
 
 
     // crear tabla intermedia entre producto y usuario
-    @ManyToMany
-    private List<Usuario> favorito;
+    @ManyToMany(mappedBy = "productofavorito")
+    private List<Usuario> usuarioF;
 
 
     /// relacion con el producto

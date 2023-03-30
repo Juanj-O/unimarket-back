@@ -98,4 +98,14 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<ProductoGetDTO> listarProductosFavoritos() {
         return null;
     }
+
+    @Override
+    public void crearFavorito(int codigoUsuario, int codigoProducto) throws Exception {
+
+    }
+
+    @Override
+    public void eliminarFavorito(int codigoUsuario, int codigoProducto) throws Exception {
+
+    }
 }

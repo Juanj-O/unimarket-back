@@ -45,8 +45,9 @@ public class Usuario implements Serializable {
     private Ciudad ciudad;
 
     /// crear la tabla intermedia entre producto y usuario
-    @ManyToMany(mappedBy = "favorito")
-    private List<Producto> ProductoFav;
+    @ManyToMany
+    @JoinTable(name = "favorito")
+    private List<Producto> productofavorito;
 
 
 

@@ -32,4 +32,8 @@ public interface ProductoServicio {
     List<ProductoGetDTO>  listarProductosPrecio(float precioMin, float precioMax);
 
     List<ProductoGetDTO> listarProductosFavoritos();
+
+    void crearFavorito(int codigoUsuario, int codigoProducto) throws Exception;
+
+    void eliminarFavorito(int codigoUsuario, int codigoProducto) throws Exception;
 }
