@@ -4,14 +4,16 @@ import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
 import co.edu.uniquindio.proyecto.modelo.Estado;
+import co.edu.uniquindio.proyecto.modelo.Producto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface ProductoServicio {
 
     int crearProducto(ProductoDTO productoDTO) throws Exception;
 
-    int eliminarProducto(int codigoProducto);
+    void eliminarProducto(int codigoProducto) throws Exception;
 
     int actualizarProducto(int codigoProducto, ProductoDTO productoDTO);
 
@@ -36,4 +38,8 @@ public interface ProductoServicio {
     void crearFavorito(int codigoUsuario, int codigoProducto) throws Exception;
 
     void eliminarFavorito(int codigoUsuario, int codigoProducto) throws Exception;
+
+    void validarExiste(int codigo) throws Exception;
+
+    int actualizarUnidades(Producto producto, int unidades) throws Exception;
 }

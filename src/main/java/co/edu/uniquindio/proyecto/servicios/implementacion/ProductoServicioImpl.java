@@ -9,7 +9,6 @@ import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +21,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final ProductoRepo productoRepo;
 
     private final UsuarioServicio usuarioServicio;
+    private final ProductoServicio productoServicio;
 
 
     @Override
@@ -45,8 +45,9 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int eliminarProducto(int codigoProducto) {
-        return 0;
+    public void eliminarProducto(int codigoProducto) throws Exception {
+        validarExiste(codigoProducto);
+        productoRepo.deleteById(codigoProducto);
     }
 
     @Override
@@ -107,5 +108,17 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public void eliminarFavorito(int codigoUsuario, int codigoProducto) throws Exception {
 
+    }
+
+    @Override
+    public void validarExiste(int codigo) throws Exception{
+        productoServicio.obtenerProducto(codigo);
+    }
+
+    @Override
+    public int actualizarUnidades(Producto producto, int unidades) throws Exception{
+        validarExiste(producto.getCodigo());
+        producto.setUnidades(unidades);
+        return productoRepo.save(producto).getCodigo();
     }
 }
