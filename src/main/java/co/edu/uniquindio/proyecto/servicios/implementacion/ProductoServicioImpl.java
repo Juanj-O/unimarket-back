@@ -9,6 +9,7 @@ import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,10 +21,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ProductoServicioImpl implements ProductoServicio {
 
-    private final ProductoRepo productoRepo;
-
-    private final UsuarioServicio usuarioServicio;
-    private final ProductoServicio productoServicio;
+    @Autowired
+    private ProductoRepo productoRepo;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
 
     @Override
