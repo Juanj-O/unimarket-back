@@ -12,7 +12,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -46,18 +48,23 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public void eliminarProducto(int codigoProducto) throws Exception {
-        validarExiste(codigoProducto);
+        validarProductoExiste(codigoProducto);
         productoRepo.deleteById(codigoProducto);
     }
 
     @Override
-    public int actualizarProducto(int codigoProducto, ProductoDTO productoDTO) {
-        return 0;
+    public ProductoGetDTO actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception {
+        validarProductoExiste(codigoProducto);
+        Producto producto = convertirDTO(productoDTO);
+        producto.setCodigo(codigoProducto);
+        return convertir(productoRepo.save(producto));
     }
 
     @Override
-    public int actualizarProductoEstado(int codigoProducto, boolean estado) {
-        return 0;
+    public void actualizarProductoEstado(int codigoProducto, boolean estado) throws Exception {
+        validarProductoExiste(codigoProducto);
+        Producto producto = obtener(codigoProducto);
+        producto.setEstado(estado);
     }
 
     @Override
@@ -66,8 +73,20 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public ProductoGetDTO obtenerProducto(int codigoProducto) {
-        return null;
+    public ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception{
+
+        return convertir(obtener(codigoProducto));
+    }
+
+    @Override
+    public Producto obtener(int codigoProducto) throws Exception {
+        //Devuelve un producto dado su codigo
+        Optional<Producto> producto = productoRepo.findById(codigoProducto);
+
+        if(producto.isEmpty()){
+            throw new Exception("El código "+codigoProducto+" no está asociado a ningún producto");
+        }
+        return producto.get();
     }
 
     @Override
@@ -76,8 +95,19 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosUsuario(int cedulaUsuario) {
-        return null;
+    public List<ProductoGetDTO> listarProductosUsuario(String cedulaUsuario) throws Exception {
+        List<Producto> productos = productoRepo.listarProductosDelUsuario(cedulaUsuario);
+
+        if(productos.isEmpty()) {
+            throw new Exception("El usuario no tiene productos");
+        }
+
+        List<ProductoGetDTO> response = new ArrayList<>();
+        for(Producto producto : productos){
+            response.add(convertir(producto));
+        }
+
+        return response;
     }
 
     @Override
@@ -110,14 +140,46 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     }
 
-    @Override
-    public void validarExiste(int codigo) throws Exception{
-        productoServicio.obtenerProducto(codigo);
+    private void validarProductoExiste (int codigoProducto) throws Exception {
+        boolean existe = productoRepo.existsById(codigoProducto);
+
+        if( !existe ){
+            throw new Exception("No se encuentra ningún producto con el código "+codigoProducto);
+        }
+
+    }
+
+    private Producto convertirDTO(ProductoDTO productoDTO) throws Exception {
+        Producto producto = new Producto();
+        producto.setEstado(false);
+        producto.setNombre(productoDTO.getNombre());
+        producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setUnidades(productoDTO.getUnidades());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setUsuario(usuarioServicio.obtener(productoDTO.getCedulaUsuario()));
+        return producto;
+    }
+
+    private ProductoGetDTO convertir(Producto producto){
+        ProductoGetDTO productoGetDTO = new ProductoGetDTO(
+                producto.getCodigo(),
+                producto.getFechaLimite(),
+                producto.isEstado(),
+                producto.getFechaCreacion(),
+                producto.getNombre(),
+                producto.getDescripcion(),
+                producto.getPrecio(),
+                producto.getUnidades(),
+                producto.getUsuario().getCedula(),
+                producto.getImagen(),
+                producto.getCategoria()
+        );
+        return productoGetDTO;
     }
 
     @Override
     public int actualizarUnidades(Producto producto, int unidades) throws Exception{
-        validarExiste(producto.getCodigo());
+        validarProductoExiste(producto.getCodigo());
         producto.setUnidades(unidades);
         return productoRepo.save(producto).getCodigo();
     }

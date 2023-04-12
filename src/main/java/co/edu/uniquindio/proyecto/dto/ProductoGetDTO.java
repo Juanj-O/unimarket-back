@@ -1,14 +1,19 @@
 package co.edu.uniquindio.proyecto.dto;
 
 import co.edu.uniquindio.proyecto.modelo.Categoria;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-
+@AllArgsConstructor
+@Getter
+@Setter
 public class ProductoGetDTO {
 
-    private String codigo;
+    private int codigo;
 
     private LocalDateTime fechaLimite;
 
@@ -20,7 +25,7 @@ public class ProductoGetDTO {
 
     private String descripcion;
 
-    private Float precio;
+    private float precio;
 
     private int unidades;
 

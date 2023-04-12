@@ -15,17 +15,18 @@ public interface ProductoServicio {
 
     void eliminarProducto(int codigoProducto) throws Exception;
 
-    int actualizarProducto(int codigoProducto, ProductoDTO productoDTO);
+    ProductoGetDTO actualizarProducto(int codigoProducto, ProductoDTO productoDTO) throws Exception;
 
-    int actualizarProductoEstado(int codigoProducto, boolean estado);
+    void actualizarProductoEstado(int codigoProducto, boolean estado) throws Exception;
 
     int actualizarProductoCantidad(int codigoProducto, int unidades);
 
-    ProductoGetDTO obtenerProducto(int codigoProducto);
+    ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception;
 
+    Producto obtener(int codigoProducto) throws Exception;
     List<ProductoGetDTO> listarProductoCategoria(Categoria categoria);
 
-    List<ProductoGetDTO>  listarProductosUsuario(int cedulaUsuario);
+    List<ProductoGetDTO>  listarProductosUsuario(String cedulaUsuario) throws Exception;
 
     List<ProductoGetDTO> listarProductosEstadoModerador(Estado estado);
 
@@ -39,7 +40,6 @@ public interface ProductoServicio {
 
     void eliminarFavorito(int codigoUsuario, int codigoProducto) throws Exception;
 
-    void validarExiste(int codigo) throws Exception;
 
     int actualizarUnidades(Producto producto, int unidades) throws Exception;
 }
