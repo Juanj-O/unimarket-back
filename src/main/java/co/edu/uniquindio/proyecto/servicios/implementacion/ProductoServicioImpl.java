@@ -116,13 +116,35 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosNombre(String nombre) {
-        return null;
+    public List<ProductoGetDTO> listarProductosNombre(String nombre) throws Exception {
+        List<Producto> productos = productoRepo.listarProductosPorNombre(nombre);
+
+        if (productos.isEmpty()){
+            throw new Exception("El producto no se encuentra");
+        }
+
+        List<ProductoGetDTO> response = new ArrayList<>();
+        for (Producto producto : productos){
+            response.add(convertir(producto));
+        }
+
+        return response;
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosPrecio(float precioMin, float precioMax) {
-        return null;
+    public List<ProductoGetDTO> listarProductosPrecio(float precioMin, float precioMax) throws Exception {
+        List<Producto> productos = productoRepo.listarProductosPorPrecio(precioMin, precioMax);
+
+        if (productos.isEmpty()){
+            throw new Exception("No hay productos en este rango de precios");
+        }
+
+        List<ProductoGetDTO> response = new ArrayList<>();
+        for (Producto producto : productos){
+            response.add(convertir(producto));
+        }
+
+        return response;
     }
 
     @Override

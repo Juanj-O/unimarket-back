@@ -30,9 +30,9 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO> listarProductosEstadoModerador(Estado estado);
 
-    List<ProductoGetDTO>  listarProductosNombre(String nombre);
+    List<ProductoGetDTO>  listarProductosNombre(String nombre) throws Exception;
 
-    List<ProductoGetDTO>  listarProductosPrecio(float precioMin, float precioMax);
+    List<ProductoGetDTO>  listarProductosPrecio(float precioMin, float precioMax) throws Exception;
 
     List<ProductoGetDTO> listarProductosFavoritos();
 
