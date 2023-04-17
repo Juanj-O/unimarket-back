@@ -47,27 +47,32 @@ public class Usuario implements Serializable {
     /// crear la tabla intermedia entre producto y usuario
     @ManyToMany
     @JoinTable(name = "favorito")
+    @ToString.Exclude
     private List<Producto> productofavorito;
 
 
 
     /// relacion con producto
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Producto> producto;
 
 
     /// relacion con la compra
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Compra> compra;
 
 
     /// relacion con el comentario
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<Comentario> comentario;
 
 
     /// relacion con el pqrs
     @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
     private List<PQRS> pqrs;
 
 
