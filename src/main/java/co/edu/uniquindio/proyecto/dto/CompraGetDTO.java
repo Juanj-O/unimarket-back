@@ -18,7 +18,7 @@ public class CompraGetDTO {
 
     private List<DetalleCompraDTO> detalleCompraDTO;
 
-    private float valorTotal;
+    private Double valorTotal;
 
     private LocalDateTime fecha;
 }

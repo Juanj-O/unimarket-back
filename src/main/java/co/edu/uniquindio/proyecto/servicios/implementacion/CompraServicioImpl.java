@@ -85,15 +85,25 @@ public class CompraServicioImpl implements CompraServicio {
         if(listaCompras == null){
             throw new Exception("No hay facturas.");
         }
-        List<DetalleCompra> prueba = detalleCompraRepo.obtenerDetallesCompra(1);
-        for (DetalleCompra detalle: prueba
-             ) {
-            System.out.println(detalle);
-        }
+
         for (Compra compra : listaCompras) {
             CompraGetDTO compraGetDTOAux = new CompraGetDTO();
-//            compraGetDTOAux()
-            //System.out.println(compra);
+            List<DetalleCompra> listaDetallesAux = detalleCompraRepo.obtenerDetallesCompra(compra.getCodigo());
+            List<DetalleCompraDTO> listaDetallesDtoAux = new ArrayList<>();
+            for ( DetalleCompra detalle : listaDetallesAux ) {
+                DetalleCompraDTO detalleCompraDTOAux = new DetalleCompraDTO(detalle.getCantidad(), detalle.getPrecio() , detalle.getProducto().getCodigo());
+                listaDetallesDtoAux.add(detalleCompraDTOAux);
+            }
+            compraGetDTOAux.setDetalleCompraDTO(listaDetallesDtoAux);
+            compraGetDTOAux.setMetodoPago(compra.getMetodoPago());
+            compraGetDTOAux.setCedulaUsuario(usuario.getCedula());
+            compraGetDTOAux.setValorTotal(compra.getValorTotal());
+            compraGetDTOAux.setFecha((compra.getFecha()));
+            listaCompraGetDto.add(compraGetDTOAux);
+        }
+
+        for ( CompraGetDTO compraGet:listaCompraGetDto) {
+            System.out.println(compraGet.getValorTotal());
         }
         return null;
     }
