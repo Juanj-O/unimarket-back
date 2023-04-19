@@ -24,22 +24,24 @@ public interface ProductoServicio {
     ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception;
 
     Producto obtener(int codigoProducto) throws Exception;
-    List<ProductoGetDTO> listarProductoCategoria(Categoria categoria);
+    List<ProductoGetDTO> listarProductoCategoria(Categoria categoria) throws Exception;
 
     List<ProductoGetDTO>  listarProductosUsuario(String cedulaUsuario) throws Exception;
 
-    List<ProductoGetDTO> listarProductosEstadoModerador(Estado estado);
+    List<ProductoGetDTO> listarProductosEstadoModerador(int codigoModerador, boolean estado) throws Exception;
+
+    List<ProductoGetDTO> listarProductosEstado(boolean estado) throws Exception;
 
     List<ProductoGetDTO>  listarProductosNombre(String nombre) throws Exception;
 
-    List<ProductoGetDTO>  listarProductosPrecio(float precioMin, float precioMax) throws Exception;
+    List<ProductoGetDTO>  listarProductosPrecio(double precioMin, double precioMax) throws Exception;
 
-    List<ProductoGetDTO> listarProductosFavoritos();
+    List<ProductoGetDTO> listarProductosFavoritos(String cedula) throws Exception;
 
-    void crearFavorito(int codigoUsuario, int codigoProducto) throws Exception;
+    void crearFavorito(String cedulaUsuario, int codigoProducto) throws Exception;
 
-    void eliminarFavorito(int codigoUsuario, int codigoProducto) throws Exception;
+    void eliminarFavorito(String cedulaUsuario, int codigoProducto) throws Exception;
 
 
-    int actualizarUnidades(Producto producto, int unidades) throws Exception;
+    int actualizarUnidades(int codigoProducto, int unidades) throws Exception;
 }

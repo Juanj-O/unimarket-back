@@ -19,7 +19,7 @@ public class ProductoDTO {
 
     private String descripcion;
 
-    private Float precio;
+    private Double precio;
 
     private int unidades;
 

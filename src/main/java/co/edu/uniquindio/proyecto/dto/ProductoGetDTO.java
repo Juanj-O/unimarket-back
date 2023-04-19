@@ -25,7 +25,7 @@ public class ProductoGetDTO {
 
     private String descripcion;
 
-    private float precio;
+    private Double precio;
 
     private int unidades;
 

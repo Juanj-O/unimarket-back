@@ -28,7 +28,7 @@ public class Producto implements Serializable {
     private String descripcion;
 
     @Column(nullable = false)
-    private Float precio;
+    private Double precio;
 
     @Column(nullable = false)
     private int unidades;

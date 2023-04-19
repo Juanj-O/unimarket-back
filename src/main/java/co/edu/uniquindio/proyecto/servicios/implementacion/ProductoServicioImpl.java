@@ -5,10 +5,12 @@ import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
 import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,8 +93,20 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductoCategoria(Categoria categoria) {
-        return null;
+    public List<ProductoGetDTO> listarProductoCategoria(Categoria categoria) throws Exception {
+        List<Producto> listaProductos = productoRepo.listarProductoCategoria(categoria);
+
+        if(listaProductos.isEmpty()) {
+            throw new Exception("No hay producto en la categoria" + categoria);
+        }
+
+        List<ProductoGetDTO> response = new ArrayList<>();
+
+        for(Producto producto : listaProductos){
+            response.add( convertir(producto) );
+        }
+
+        return response;
     }
 
     @Override
@@ -112,8 +126,35 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosEstadoModerador(Estado estado) {
-        return null;
+    public List<ProductoGetDTO> listarProductosEstadoModerador( int codigoModerador ,boolean estado) throws Exception {
+        List<Producto> listaProductosEstadoModerador = productoRepo.listarProductosEstadoModerador(codigoModerador, estado);
+
+        if(listaProductosEstadoModerador.isEmpty()) {
+            throw new Exception("Usted no tiene productos con estado " + estado);
+        }
+
+        List<ProductoGetDTO> response = new ArrayList<>();
+
+        for(Producto producto : listaProductosEstadoModerador){
+            response.add( convertir(producto) );
+        }
+        return response;
+    }
+
+    @Override
+    public List<ProductoGetDTO> listarProductosEstado(boolean estado) throws Exception {
+        List<Producto> listaProductosEstado = productoRepo.listarProductosEstado(estado);
+
+        if(listaProductosEstado.isEmpty()) {
+            throw new Exception("No hay productos con estado " + estado);
+        }
+
+        List<ProductoGetDTO> respuesta = new ArrayList<>();
+
+        for(Producto producto : listaProductosEstado){
+            respuesta.add( convertir(producto) );
+        }
+        return respuesta;
     }
 
     @Override
@@ -133,7 +174,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosPrecio(float precioMin, float precioMax) throws Exception {
+    public List<ProductoGetDTO> listarProductosPrecio(double precioMin, double precioMax) throws Exception {
         List<Producto> productos = productoRepo.listarProductosPorPrecio(precioMin, precioMax);
 
         if (productos.isEmpty()){
@@ -149,18 +190,34 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosFavoritos() {
-        return null;
+    public List<ProductoGetDTO> listarProductosFavoritos(String cedulaUsuario) throws Exception {
+        List<Producto> listaProductosFavoritos = productoRepo.listarProductosFavoritos(cedulaUsuario);
+
+        if(listaProductosFavoritos.isEmpty()){
+            throw new Exception("El usuario no tiene productos favoritos");
+        }
+
+        List<ProductoGetDTO> response = new ArrayList<>();
+
+        for(Producto producto : listaProductosFavoritos){
+            response.add( convertir(producto) );
+        }
+
+        return response;
     }
 
     @Override
-    public void crearFavorito(int codigoUsuario, int codigoProducto) throws Exception {
-
+    public void crearFavorito(String cedulaUsuario, int codigoProducto) throws Exception {
+        Usuario usuario = usuarioServicio.obtener(cedulaUsuario);
+        Producto producto = obtener(codigoProducto);
+        usuario.getProductofavorito().add(producto);
     }
 
     @Override
-    public void eliminarFavorito(int codigoUsuario, int codigoProducto) throws Exception {
-
+    public void eliminarFavorito(String cedulaUsuario, int codigoProducto) throws Exception {
+        Usuario usuario = usuarioServicio.obtener(cedulaUsuario);
+        Producto producto = obtener(codigoProducto);
+        usuario.getProductofavorito().remove(producto);
     }
 
     private void validarProductoExiste (int codigoProducto) throws Exception {
@@ -201,9 +258,10 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int actualizarUnidades(Producto producto, int unidades) throws Exception{
-        validarProductoExiste(producto.getCodigo());
+    public int actualizarUnidades(int codigoProducto, int unidades) throws Exception{
+        validarProductoExiste(codigoProducto);
+        Producto producto = obtener(codigoProducto);
         producto.setUnidades(unidades);
-        return productoRepo.save(producto).getCodigo();
+        return producto.getUnidades();
     }
 }
