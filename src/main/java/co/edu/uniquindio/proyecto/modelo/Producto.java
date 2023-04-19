@@ -46,6 +46,7 @@ public class Producto implements Serializable {
     /// crea la tabla de las imagenes
     @ElementCollection
     @Column(nullable = false)
+    @ToString.Exclude
     private Map<String, String> imagen;
 
     ///relacion con el usuario
@@ -56,25 +57,30 @@ public class Producto implements Serializable {
 
     /// crear la relacion entre la enum categoria y producto
     @ElementCollection
+    @ToString.Exclude
     private List<Categoria> categoria;
 
 
     // crear tabla intermedia entre producto y usuario
     @ManyToMany(mappedBy = "productofavorito")
+    @ToString.Exclude
     private List<Usuario> usuarioF;
 
 
     /// relacion con el producto
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<LogPublicacion> logPublicacion;
 
     /// relacion con detalle compra
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<DetalleCompra> detalleCompra;
 
 
     /// relacion con el comentario
     @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
     private List<Comentario> comentario;
 
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -37,7 +38,16 @@ public class DetalleCompra implements Serializable {
     @JoinColumn(nullable = false)
     private Compra compra;
 
+    public DetalleCompra(int cantidad, Double precio, Producto producto) {
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.producto = producto;
+    }
 
-
-
+    public DetalleCompra(int cantidad, Double precio, Producto producto, Compra compra) {
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.producto = producto;
+        this.compra = compra;
+    }
 }

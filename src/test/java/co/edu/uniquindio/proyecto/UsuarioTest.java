@@ -23,7 +23,7 @@ public class UsuarioTest {
             UsuarioDTO usuarioDTO = new UsuarioDTO("1223", "pepe1", "1234", "Calle 123", "pepe@qqq", "525");
             String cedula = usuarioServicio.registarUsuario(usuarioDTO);
 
-        Assertions.assertNotEquals(0, cedula);
+            Assertions.assertNotEquals(0, cedula);
 
 
         }

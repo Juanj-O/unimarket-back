@@ -11,5 +11,5 @@ import java.util.List;
 public interface CompraRepo extends JpaRepository<Compra, Integer> {
 
     @Query("select c from Compra c where c.usuario.cedula = :cedulaUsuario")
-    List<Compra> listarComprasUsuario(int cedulaUsuario);
+    List<Compra> listarComprasUsuario(String cedulaUsuario);
 }

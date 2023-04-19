@@ -6,6 +6,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -38,11 +39,28 @@ public class Compra implements Serializable {
 
     //// relacion con detalle compra
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<DetalleCompra> detalleCompra;
 
 
     /// relacion con el pqrs
     @OneToMany(mappedBy = "compra")
+    @ToString.Exclude
     private List<PQRS> pqrs;
 
+
+    public Compra(Double valorTotal, LocalDateTime fecha, MetodoPago metodoPago, Usuario usuario) {
+        this.valorTotal = valorTotal;
+        this.fecha = fecha;
+        this.metodoPago = metodoPago;
+        this.usuario = usuario;
+    }
+
+    public Compra(Double valorTotal, LocalDateTime fecha, MetodoPago metodoPago, Usuario usuario, List<DetalleCompra> detalleCompra) {
+        this.valorTotal = valorTotal;
+        this.fecha = fecha;
+        this.metodoPago = metodoPago;
+        this.usuario = usuario;
+        this.detalleCompra = detalleCompra;
+    }
 }
