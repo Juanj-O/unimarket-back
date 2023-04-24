@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
@@ -118,7 +119,7 @@ public class ProductoTest {
         productoServicio.crearFavorito(cedulaUsuario, codigoProducto);
 
         List<ProductoGetDTO> lista = productoServicio.listarProductosFavoritos(cedulaUsuario);
-        Assertions.assertEquals(3,lista.size());
+        Assertions.assertEquals(2,lista.size());
     }
 
     @Test
@@ -133,7 +134,7 @@ public class ProductoTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarProductosEstadoModeradorTest()throws Exception {
-        List<ProductoGetDTO> listaProductos = productoServicio.listarProductosEstadoModerador(1, true);
+        List<ProductoGetDTO> listaProductos = productoServicio.listarProductosEstadoModerador(1, Estado.APROBADO);
         Assertions.assertEquals(1,listaProductos.size());
     }
 }

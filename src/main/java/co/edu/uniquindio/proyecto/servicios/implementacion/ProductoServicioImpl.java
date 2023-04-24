@@ -126,7 +126,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<ProductoGetDTO> listarProductosEstadoModerador( int codigoModerador ,boolean estado) throws Exception {
+    public List<ProductoGetDTO> listarProductosEstadoModerador( int codigoModerador ,Estado estado) throws Exception {
         List<Producto> listaProductosEstadoModerador = productoRepo.listarProductosEstadoModerador(codigoModerador, estado);
 
         if(listaProductosEstadoModerador.isEmpty()) {

@@ -28,7 +28,7 @@ public interface ProductoServicio {
 
     List<ProductoGetDTO>  listarProductosUsuario(String cedulaUsuario) throws Exception;
 
-    List<ProductoGetDTO> listarProductosEstadoModerador(int codigoModerador, boolean estado) throws Exception;
+    List<ProductoGetDTO> listarProductosEstadoModerador(int codigoModerador, Estado estado) throws Exception;
 
     List<ProductoGetDTO> listarProductosEstado(boolean estado) throws Exception;
 

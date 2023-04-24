@@ -61,7 +61,7 @@ INSERT INTO unimarket.moderador VALUES (3,"moderado3","juanmoderador3@hotmail.co
 INSERT INTO unimarket.moderador VALUES (4,"moderado4","yefersonmoderador4@hotmail.com","yeferson zuluaga");
 INSERT INTO unimarket.moderador VALUES (5,"moderado5","julianamoderador5@hotmail.com","juliana arias");
 
-INSERT INTO unimarket.log_publicacion VALUES (1,"se rechaza producto",1,now(),1,1);
+INSERT INTO unimarket.log_publicacion VALUES (1,"se aprueba producto",1,now(),1,1);
 INSERT INTO unimarket.log_publicacion VALUES (2,"se aprueba producto",1,now(),2,2);
 INSERT INTO unimarket.log_publicacion VALUES (3,"se aprueba producto",1,now(),3,3);
 INSERT INTO unimarket.log_publicacion VALUES (4,"se rechaza producto",2,now(),4,7);

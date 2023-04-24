@@ -41,6 +41,7 @@ public class LogPublicacion implements Serializable {
 
     ///  enumeracion de estado
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Estado estado;
 
 }

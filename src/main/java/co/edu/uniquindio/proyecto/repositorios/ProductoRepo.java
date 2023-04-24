@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.repositorios;
 
 import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,6 +30,6 @@ public interface ProductoRepo  extends JpaRepository<Producto, Integer> {
     @Query("select f from Usuario u join u.productofavorito f where u.cedula = :cedulaUsuario and f.estado = true")
     List<Producto> listarProductosFavoritos(String cedulaUsuario);
 
-    @Query("select p from Producto p where p.usuario.cedula = :codigoModerador and p.estado = :estado and current_date <= p.fechaLimite")
-    List<Producto> listarProductosEstadoModerador(int codigoModerador, boolean estado);
+    @Query("select p from Producto p inner join LogPublicacion l on p.codigo = l.producto.codigo where l.moderador.codigo = :codigoModerador and l.estado = :estado")
+    List<Producto> listarProductosEstadoModerador(int codigoModerador, Estado estado);
 }
