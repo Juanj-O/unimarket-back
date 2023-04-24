@@ -39,4 +39,10 @@ public class PQRS implements Serializable {
     @JoinColumn(nullable = false)
     private Compra compra;
 
+    public PQRS(String mensaje, LocalDateTime fecha, Usuario usuario, Compra compra) {
+        this.mensaje = mensaje;
+        this.fecha = fecha;
+        this.usuario = usuario;
+        this.compra = compra;
+    }
 }

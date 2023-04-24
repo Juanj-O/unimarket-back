@@ -12,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CompraGetDTO {
 
+    private Integer idCompra;
+
     private MetodoPago metodoPago;
 
     private String cedulaUsuario;

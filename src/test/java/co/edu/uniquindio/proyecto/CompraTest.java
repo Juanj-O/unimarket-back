@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto;
 
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
+import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
 import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.DetalleCompra;
@@ -54,7 +55,10 @@ public class CompraTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarComprasUsuario() throws Exception {
-        compraServicio.listarComprasUsuario("1234");
+        List<CompraGetDTO> lista  = compraServicio.listarComprasUsuario("1234");
+
+        lista.forEach(System.out::println);
+
     }
 
 }

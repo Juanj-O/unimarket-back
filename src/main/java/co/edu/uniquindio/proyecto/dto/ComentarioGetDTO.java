@@ -1,7 +1,14 @@
 package co.edu.uniquindio.proyecto.dto;
 
+import lombok.*;
+
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ComentarioGetDTO {
 
     private int codigo;

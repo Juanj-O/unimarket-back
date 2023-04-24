@@ -1,12 +1,17 @@
 package co.edu.uniquindio.proyecto.modelo;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Comentario implements Serializable {
 
     @Id
@@ -30,4 +35,11 @@ public class Comentario implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuario;
+
+    public Comentario(String descripcion, LocalDateTime fechaCreacion, Producto producto, Usuario usuario) {
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.producto = producto;
+        this.usuario = usuario;
+    }
 }

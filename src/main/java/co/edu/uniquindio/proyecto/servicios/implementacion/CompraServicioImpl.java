@@ -56,6 +56,9 @@ public class CompraServicioImpl implements CompraServicio {
             if(producto == null){
                 throw new Exception("El producto " + detalleCompraAux.getCodigoProducto()+ "no existe.");
             }
+            if(producto.getUnidades() < compraDTO.getDetalleCompraDTO().get(i).getUnidades()){
+                throw new Exception("error");
+            }
             DetalleCompra detalleAux = new DetalleCompra(detalleCompraAux.getUnidades(),detalleCompraAux.getPrecio(),producto);
             listaDetalles.add(detalleAux);
             totalCompra += detalleCompraAux.getPrecio();
@@ -65,6 +68,9 @@ public class CompraServicioImpl implements CompraServicio {
         compra = compraRepo.save(compra);
 
         for (DetalleCompra detalle : listaDetalles) {
+            Producto producto = productoRepo.findById(detalle.getProducto().getCodigo()).orElse(null);
+            producto.setUnidades(producto.getUnidades()-detalle.getCantidad());
+            productoRepo.save(producto).getUnidades();
             detalle.setCompra(compra);
             detalleCompraRepo.save(detalle);
         }
@@ -99,13 +105,14 @@ public class CompraServicioImpl implements CompraServicio {
             compraGetDTOAux.setCedulaUsuario(usuario.getCedula());
             compraGetDTOAux.setValorTotal(compra.getValorTotal());
             compraGetDTOAux.setFecha((compra.getFecha()));
+            compraGetDTOAux.setIdCompra(compra.getCodigo());
             listaCompraGetDto.add(compraGetDTOAux);
         }
 
         for ( CompraGetDTO compraGet:listaCompraGetDto) {
             System.out.println(compraGet.getValorTotal());
         }
-        return null;
+        return listaCompraGetDto;
     }
 
 

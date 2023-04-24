@@ -7,11 +7,9 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ComentarioDTO {
+public class ActualizarComentarioDTO {
+
+    private int codigo ;
 
     private String mensaje;
-
-    private int codigoProducto;
-
-    private String cedulaUsuario;
 }

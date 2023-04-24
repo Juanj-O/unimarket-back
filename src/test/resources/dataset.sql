@@ -33,6 +33,7 @@ INSERT INTO unimarket.comentario VALUES (2,"EXCELENTE PRODUCTO",now(),2,1234);
 INSERT INTO unimarket.comentario VALUES (3,"EXCELENTE PRODUCTO",now(),3,5678);
 INSERT INTO unimarket.comentario VALUES (4,"llego rapido",now(),4,9874);
 INSERT INTO unimarket.comentario VALUES (5,"EXCELENTE PRODUCTO",now(),5,1478);
+INSERT INTO unimarket.comentario VALUES (6,"EXCELENTE PRODUCTO",now(),1,1234);
 
 INSERT INTO unimarket.compra VALUES (1,now(),1,150000,5236);
 INSERT INTO unimarket.compra VALUES (2,now(),2,6000000,1234);
