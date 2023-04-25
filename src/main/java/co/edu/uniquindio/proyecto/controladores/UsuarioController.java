@@ -26,10 +26,29 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/actualizar-usuario/{cedula}")
-    public ResponseEntity<?> actualizarUsuario(@PathVariable String cedula, @RequestBody UsuarioDTO usuarioDTO){
+    @PutMapping("/actualizar-usuario")
+    public ResponseEntity<?> actualizarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         try {
-            return ResponseEntity.status(200).body(usuarioServicio.registarUsuario(usuarioDTO));
+            return ResponseEntity.status(200).body(usuarioServicio.actualizarUsuario(usuarioDTO));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/obtener-usuario/{cedula}")
+    public ResponseEntity<?> obtenerUsuarioCedula(@PathVariable(name = "cedula") String cedula){
+        try {
+            return ResponseEntity.status(200).body(usuarioServicio.obtenerUsuarioCodigo(cedula));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminar-usuario/{cedula}")
+    public ResponseEntity<?> eliminarUsuario(@PathVariable(name = "cedula") String cedula){
+        try {
+            usuarioServicio.eliminiarUsuario(cedula);
+            return ResponseEntity.status(200).body("Eliminado Exitosamente");
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }

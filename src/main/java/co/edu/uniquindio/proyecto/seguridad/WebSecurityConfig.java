@@ -34,7 +34,7 @@ public class WebSecurityConfig {
         http.cors();
         http.authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll();
         http.authorizeHttpRequests().requestMatchers("/api/compras/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers("/api/usuario/**").permitAll();
+        http.authorizeHttpRequests().requestMatchers("/api/usuario/**", "/api/comentario/**").permitAll();
         http.authorizeHttpRequests().requestMatchers( "/doc/**", "/swagger-ui/**", "/v3/api-docs/**"
         ).permitAll();
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);

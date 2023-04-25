@@ -10,7 +10,7 @@ public interface UsuarioServicio {
 
     Usuario registarUsuario(UsuarioDTO usuarioDTO) throws Exception;
 
-    String actualizarUsuario(String cedula, UsuarioDTO usuarioDTO ) throws Exception;
+    String actualizarUsuario(UsuarioDTO usuarioDTO ) throws Exception;
 
     String eliminiarUsuario(String cedula) throws Exception;
 

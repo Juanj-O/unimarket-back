@@ -2,9 +2,11 @@ package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
+import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.implementacion.CompraServicioImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,9 @@ public class CompraController {
     @PostMapping("/crear-compra")
     public ResponseEntity<?> crearCompra(@RequestBody CompraDTO compraDTO) {
             try {
-                return ResponseEntity.status(200).body(compraServicio.crearCompra(compraDTO));
+                compraServicio.crearCompra(compraDTO);
+                return ResponseEntity.status(HttpStatus.CREATED).body(new MensajeDTO<>(HttpStatus.CREATED,
+                        false, "Compra exitosa"));
             } catch (Exception e) {
                 return ResponseEntity.status(500).body(e.getMessage());
             }

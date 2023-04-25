@@ -40,7 +40,7 @@ public class UsuarioTest {
         }
 
     @Test
-    @Sql("classpath:dataset.sql")
+    /*@Sql("classpath:dataset.sql")*/
     public void Login() throws Exception{
 
 /*       UsuarioDTO usuarioDTO = new UsuarioDTO("1234", "juan lopez", "3218745560", "carrera 14", "juanlopez@hotmail.com", "123juan");
@@ -84,16 +84,14 @@ public class UsuarioTest {
 
     }
 
-
     @Test
     public void actualizarUsuarioTest(){
         try {
             UsuarioDTO usuarioDTO = new UsuarioDTO("111", "pepe1@email.com", "1234", "Calle 123", "2782", "343");
-            usuarioServicio.actualizarUsuario("2344", usuarioDTO);
+            usuarioServicio.actualizarUsuario(usuarioDTO);
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     @Test
@@ -104,6 +102,5 @@ public class UsuarioTest {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 }

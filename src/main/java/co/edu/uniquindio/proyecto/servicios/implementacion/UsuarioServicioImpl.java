@@ -38,16 +38,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public String actualizarUsuario(String cedula, UsuarioDTO usuarioDTO) throws Exception {
+    public String actualizarUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
         /**
          * TODO Validar que el correo no se repita
          */
 
-        validarExiste(cedula);
+        validarExiste(usuarioDTO.getCedula());
 
         Usuario usuario = convertir(usuarioDTO);
-        usuario.setCedula(cedula);
+        usuario.setCedula(usuarioDTO.getCedula());
 
         return usuarioRepo.save(usuario).getCedula();
     }
