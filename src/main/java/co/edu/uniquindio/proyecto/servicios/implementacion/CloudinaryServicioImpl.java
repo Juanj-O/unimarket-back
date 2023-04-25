@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-
 public class CloudinaryServicioImpl implements CloudinaryServicio {
 
     private final Cloudinary cloudinary;
