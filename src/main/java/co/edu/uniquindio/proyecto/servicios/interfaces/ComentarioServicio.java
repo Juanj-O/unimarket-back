@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public interface ComentarioServicio {
 
-    Comentario crearComentario(ComentarioDTO comentarioDTO);
+    Comentario crearComentario(ComentarioDTO comentarioDTO) throws Exception;
 
-    List<ComentarioGetDTO> listarComentariosProducto(int codigoProducto);
+    List<ComentarioGetDTO> listarComentariosProducto(int codigoProducto) throws Exception;
 
-    Comentario actualizarComentario(ActualizarComentarioDTO actualizarComentarioDTO);
+    Comentario actualizarComentario(ActualizarComentarioDTO actualizarComentarioDTO) throws Exception;
 }

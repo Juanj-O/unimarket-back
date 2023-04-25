@@ -32,15 +32,15 @@ public class ComentarioSericioImpl implements ComentarioServicio {
     private ComentarioRepo comentarioRepo;
 
     @Override
-    public Comentario crearComentario(ComentarioDTO comentarioDTO) {
+    public Comentario crearComentario(ComentarioDTO comentarioDTO) throws Exception {
         Usuario usuario = usuarioRepo.findById(comentarioDTO.getCedulaUsuario()).orElse(null);
         if (usuario == null){
-
+            throw new Exception("El Usuario no existe.");
         }
         Producto producto = productoRepo.findById(comentarioDTO.getCodigoProducto()).orElse(null);
 
         if(producto == null ){
-
+            throw new Exception("El Producto no existe.");
         }
 
         Comentario comentario = comentarioRepo.save(new Comentario(comentarioDTO.getMensaje() , LocalDateTime.now() , producto , usuario ));
@@ -49,12 +49,12 @@ public class ComentarioSericioImpl implements ComentarioServicio {
     }
 
     @Override
-    public List<ComentarioGetDTO> listarComentariosProducto(int codigoProducto) {
+    public List<ComentarioGetDTO> listarComentariosProducto(int codigoProducto) throws Exception{
 
         Producto producto = productoRepo.findById(codigoProducto).orElse(null);
 
         if(producto == null ){
-
+            throw new Exception("El Producto no existe.");
         }
 
         List<Comentario> listaComentarios = comentarioRepo.obtenerComentarios(codigoProducto);
@@ -68,7 +68,7 @@ public class ComentarioSericioImpl implements ComentarioServicio {
     }
 
     @Override
-    public Comentario actualizarComentario(ActualizarComentarioDTO actualizarComentarioDTO) {
+    public Comentario actualizarComentario(ActualizarComentarioDTO actualizarComentarioDTO) throws Exception{
 
         Comentario comentario = comentarioRepo.findById(actualizarComentarioDTO.getCodigo()).orElse(null);
 

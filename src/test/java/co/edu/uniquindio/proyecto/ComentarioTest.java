@@ -27,7 +27,7 @@ public class ComentarioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void crearComentario(){
+    public void crearComentario() throws Exception{
         ComentarioDTO comentarioDTO = new ComentarioDTO("prueba" , 1 , "1234");
         Comentario comentario = comentarioSericio.crearComentario(comentarioDTO);
 //        System.out.println();
@@ -36,7 +36,7 @@ public class ComentarioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarComentariosProducto(){
+    public void listarComentariosProducto() throws Exception{
             List<ComentarioGetDTO> lista = comentarioSericio.listarComentariosProducto(1);
             lista.forEach(System.out::println);
     }
@@ -52,7 +52,7 @@ public class ComentarioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarComentario(){
+    public void actualizarComentario() throws Exception{
         ActualizarComentarioDTO actualizarComentarioDTO = new ActualizarComentarioDTO(1 , "prueba");
         Comentario comentario = comentarioSericio.actualizarComentario(actualizarComentarioDTO);
         System.out.println(comentario);

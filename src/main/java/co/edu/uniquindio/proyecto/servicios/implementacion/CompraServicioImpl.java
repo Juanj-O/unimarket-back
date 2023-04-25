@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.CompraCreadaDTO;
 import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.CompraGetDTO;
 import co.edu.uniquindio.proyecto.dto.DetalleCompraDTO;
@@ -38,7 +39,7 @@ public class CompraServicioImpl implements CompraServicio {
     private DetalleCompraRepo  detalleCompraRepo;
 
     @Override
-    public Compra  crearCompra(CompraDTO compraDTO)  throws Exception {
+    public Compra crearCompra(CompraDTO compraDTO)  throws Exception {
 
         Usuario usuario = usuarioRepo.findById(compraDTO.getCedulaUsuario()).orElse(null);
 
@@ -74,6 +75,8 @@ public class CompraServicioImpl implements CompraServicio {
             detalle.setCompra(compra);
             detalleCompraRepo.save(detalle);
         }
+        CompraCreadaDTO compraCreadaDTO = new CompraCreadaDTO(compra.getCodigo() , compra.getMetodoPago() , compra.getUsuario().getCedula());
+        System.out.println(compra);
         return compra;
     }
 
