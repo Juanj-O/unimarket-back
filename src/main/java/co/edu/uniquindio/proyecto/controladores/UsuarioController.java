@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.servicios.implementacion.CambiarContrasenaServicioImpl;
+import co.edu.uniquindio.proyecto.servicios.implementacion.EmailServicioImpl;
 import co.edu.uniquindio.proyecto.servicios.implementacion.UsuarioServicioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,12 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioServicioImpl usuarioServicio;
+
+    @Autowired
+    private CambiarContrasenaServicioImpl cambiarContrasenaServicio;
+
+    @Autowired
+    private EmailServicioImpl emailServicio;
 
     @PostMapping("/registrar-usuario")
     public ResponseEntity<?> registrarUsuario(@RequestBody UsuarioDTO usuarioDTO){
@@ -49,6 +58,17 @@ public class UsuarioController {
         try {
             usuarioServicio.eliminiarUsuario(cedula);
             return ResponseEntity.status(200).body("Eliminado Exitosamente");
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/enviar-email")
+    public ResponseEntity<?> recuperarPassword(@RequestBody String email){
+        try {
+            emailServicio.enviarEmail("enviar correo","correo" ,email);
+            return ResponseEntity.status(200).body(new MensajeDTO<>(HttpStatus.ACCEPTED,
+                    false, "Revisa tu correo"));
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }
