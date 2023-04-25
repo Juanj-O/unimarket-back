@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto;
 
+import co.edu.uniquindio.proyecto.dto.ImagenDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoGetDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +35,7 @@ public class ProductoTest {
     @Sql("classpath:dataset.sql")
     public void crearProductoTest() throws Exception {
 
-        Map<String, String> imagenes = null;
+        List<ImagenDTO> imagenes = new ArrayList<>();
         List<Categoria> categorias = null;
         ProductoDTO productoDTO = new ProductoDTO("NintendoTEST", "Gen 2.0", 25.000, 2, "1234", imagenes, categorias);
         int productoGuardado = productoServicio.crearProducto(productoDTO);
@@ -53,7 +56,7 @@ public class ProductoTest {
     @Sql("classpath:dataset.sql")
     public void actualizarProductoTest() throws Exception {
 
-        Map<String, String> imagenes = null;
+        List<ImagenDTO> imagenes = new ArrayList<>();
         List<Categoria> categorias = null;
         ProductoDTO productoDTO = new ProductoDTO("NintendoTEST", "Gen 2.0", 25.000, 2, "1234", imagenes, categorias);
         productoServicio.actualizarProducto(1, productoDTO);
