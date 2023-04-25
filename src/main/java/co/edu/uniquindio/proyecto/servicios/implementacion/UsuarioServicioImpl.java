@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,8 +18,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
-    public String registarUsuario(UsuarioDTO usuarioDTO) throws Exception {
+    public Usuario registarUsuario(UsuarioDTO usuarioDTO) throws Exception {
 
         Usuario buscado = usuarioRepo.buscarUsuario(usuarioDTO.getEmail());
 
@@ -26,8 +29,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El correo " + usuarioDTO.getEmail() + " ya está en uso");
         }
 
+
+
         Usuario usuario = convertir(usuarioDTO);
-        return usuarioRepo.save(usuario).getCedula();
+        System.out.println(usuario);
+
+        return usuarioRepo.save(usuario);
     }
 
     @Override
@@ -51,6 +58,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuarioRepo.deleteById(cedula);
         return cedula;
     }
+
 
 
     public UsuarioGetDTO obtenerUsuarioCodigo(String cedula) throws Exception{
@@ -98,8 +106,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuario.setTelefono( usuarioDTO.getTelefono() );
         usuario.setDireccion( usuarioDTO.getDireccion() );
         usuario.setEmail( usuarioDTO.getEmail() );
-        usuario.setContrasena( usuarioDTO.getContrasena() );
-
+        usuario.setContrasena( usuarioDTO.getContrasena());
         return usuario;
     }
 }

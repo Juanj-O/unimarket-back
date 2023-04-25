@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UsuarioServicio {
 
-    String registarUsuario(UsuarioDTO usuarioDTO) throws Exception;
+    Usuario registarUsuario(UsuarioDTO usuarioDTO) throws Exception;
 
     String actualizarUsuario(String cedula, UsuarioDTO usuarioDTO ) throws Exception;
 

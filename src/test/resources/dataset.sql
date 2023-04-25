@@ -5,11 +5,11 @@ insert into unimarket.ciudad values (4, "Pereira");
 insert into unimarket.ciudad values (5, "Manizales");
 
 
-INSERT INTO unimarket.usuario VALUES ("1234","123juan","carrera 14","juanlopez@hotmail.com",1,"juan lopez","3218745560","1");
-INSERT INTO unimarket.usuario VALUES ("5678","123kelly","calle 20","kellyortiz@gmail.com",1,"kelly ortiz","3145897562","2");
-INSERT INTO unimarket.usuario VALUES ("9874","123luis","manzana 1 casa 11","luismendez@hotmail.com",1,"luis mendes","3158965789","3");
-INSERT INTO unimarket.usuario VALUES ("1478","123camila","carrera 5 numero 11","camilaosorio@gmail.com",1,"camila osorio","31266589999","4");
-INSERT INTO unimarket.usuario VALUES ("5236","123pedro","barrio alamos casa 12 numero 3","pedrorodriguez@hotmail.com",1,"pedro rodriguez","3189657855","5");
+INSERT INTO unimarket.usuario VALUES ("1234","$2a$10$vW9laO4IjTPst9fnGINxBOmmv0xEX8sPU2YQVsEGXgk1erjQSsuY.","carrera 14","juanlopez@hotmail.com",1,"juan lopez","3218745560",1);
+INSERT INTO unimarket.usuario VALUES ("5678","123kelly","calle 20","kellyortiz@gmail.com",1,"kelly ortiz","3145897562",2);
+INSERT INTO unimarket.usuario VALUES ("9874","123luis","manzana 1 casa 11","luismendez@hotmail.com",1,"luis mendes","3158965789",3);
+INSERT INTO unimarket.usuario VALUES ("1478","123camila","carrera 5 numero 11","camilaosorio@gmail.com",1,"camila osorio","31266589999",4);
+INSERT INTO unimarket.usuario VALUES ("5236","123pedro","barrio alamos casa 12 numero 3","pedrorodriguez@hotmail.com",1,"pedro rodriguez","3189657855",5);
 
 INSERT INTO unimarket.producto VALUES (1,"AUDIFONOS SAMSUNG 158-6685",1,now(),date_add(now(),interval 60 DAY),"AUDIFONOS SAMSUNG",75000,10,5236);
 INSERT INTO unimarket.producto VALUES (2,"MacBook (Retina, 12 pulgadas, 2017)",1,now(),date_add(now(),interval 60 DAY),"MacBook10,1",6000000,1,5236);

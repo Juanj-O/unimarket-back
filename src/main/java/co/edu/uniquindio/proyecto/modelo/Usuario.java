@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
     @Column(nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     private String contrasena;
 
     @Column(nullable = false)
@@ -41,7 +41,7 @@ public class Usuario implements Serializable {
 
     /// relacion con ciudad
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn()
     private Ciudad ciudad;
 
     /// crear la tabla intermedia entre producto y usuario
