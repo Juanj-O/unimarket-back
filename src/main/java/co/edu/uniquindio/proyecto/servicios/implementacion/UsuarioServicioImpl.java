@@ -30,7 +30,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
 
-
         Usuario usuario = convertir(usuarioDTO);
         System.out.println(usuario);
 
@@ -106,7 +105,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuario.setTelefono( usuarioDTO.getTelefono() );
         usuario.setDireccion( usuarioDTO.getDireccion() );
         usuario.setEmail( usuarioDTO.getEmail() );
-        usuario.setContrasena( usuarioDTO.getContrasena());
+        usuario.setContrasena( passwordEncoder.encode(usuarioDTO.getContrasena()));
         return usuario;
     }
 }

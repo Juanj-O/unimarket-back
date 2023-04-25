@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.implementacion;
 
+import co.edu.uniquindio.proyecto.dto.ActualizarPqrsDTO;
 import co.edu.uniquindio.proyecto.dto.PqrDTO;
 import co.edu.uniquindio.proyecto.modelo.Compra;
 import co.edu.uniquindio.proyecto.modelo.PQRS;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PqrServicioImpl implements PqrsServicio {
@@ -42,8 +45,52 @@ public class PqrServicioImpl implements PqrsServicio {
 
         PQRS pqrs = pqrRepo.save(new PQRS(pqrDTO.getMensaje() , LocalDateTime.now() , usuario , compra ) );
 
-        System.out.println(pqrs.getCodigo());
 
-        return null;
+        return pqrs;
+    }
+
+    @Override
+    public List<PqrDTO> listarPQRSHechos(String cedula) throws Exception {
+
+        Usuario usuario = usuarioRepo.findById(cedula).orElse(null);
+
+        if(usuario == null){
+            throw new Exception("El usuario no existe.");
+        }
+        System.out.println(usuario.getNombreCompleto());
+
+        List<PQRS> listaPqrs = pqrRepo.listarPQRSUsuario(cedula);
+
+        List<PqrDTO> listaDTO = new ArrayList<PqrDTO>();
+        for ( PQRS pqrs : listaPqrs ) {
+            PqrDTO pqrDTO = new PqrDTO(pqrs.getUsuario().getCedula() , pqrs.getCompra().getCodigo() , pqrs.getMensaje());
+            listaDTO.add(pqrDTO);
+        }
+        return listaDTO;
+    }
+
+    @Override
+    public PQRS actualizarPqrs(ActualizarPqrsDTO actualizarPqrsDTO) throws Exception{
+
+        PQRS pqrs = pqrRepo.findById(actualizarPqrsDTO.getCodigoPqrs()).orElse(null);
+
+        if(pqrs == null ){
+            throw new Exception("No existe el pqrs");
+        }
+
+        pqrs.setMensaje(actualizarPqrsDTO.getMensaje());
+        pqrs.setFecha(LocalDateTime.now());
+        return pqrRepo.save(pqrs);
+    }
+
+    @Override
+    public void eliminarPQRS(int codigoPQRS) throws Exception{
+        PQRS pqrs = pqrRepo.findById(codigoPQRS).orElse(null);
+
+        if(pqrs == null ){
+            throw new Exception("El PQRS no existe.");
+        }
+
+        pqrRepo.delete(pqrs);
     }
 }

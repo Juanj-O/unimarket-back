@@ -77,4 +77,3 @@ INSERT INTO unimarket.pqrs VALUES (5,now(),"QUEJA 1",5,"1478");
 
 
 
-
