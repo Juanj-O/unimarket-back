@@ -25,7 +25,7 @@ public class ProductoDTO {
 
     private String cedulaUsuario;
 
-    private Map<String, String> imagenes;
+    private List<ImagenDTO> imagenes;
 
     private List<Categoria> categorias;
 

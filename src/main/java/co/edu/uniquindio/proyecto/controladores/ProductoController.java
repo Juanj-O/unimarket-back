@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
+import co.edu.uniquindio.proyecto.modelo.Categoria;
+import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.servicios.implementacion.ProductoServicioImpl;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
@@ -55,11 +57,106 @@ public class ProductoController {
         }
     }
 
-    @GetMapping("/obtener-producto/{id}")
+    @PutMapping("/actualizar-producto-cantidad")
+    public ResponseEntity<?> actualizarProductoCantidad(@RequestBody int codigoProducto, int unidades){
+        try{
+            return ResponseEntity.status(200).body(productoServicio.actualizarProductoCantidad(codigoProducto, unidades));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(value="/obtener-producto/{id}")
     public ResponseEntity<?> obtenerProducto(@PathVariable(name="id") int codigoProducto) {
+        System.out.println(codigoProducto);
         try{
             return ResponseEntity.status(200).body(productoServicio.obtenerProducto(codigoProducto));
         }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar-productos-categoria/{categoria}")
+    public ResponseEntity<?> listarProductoCategoria(@PathVariable(name="categoria") Categoria categoria) {
+        try{
+            return ResponseEntity.status(200).body(productoServicio.listarProductoCategoria(categoria));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar-productos-usuario/{cedula}")
+    public ResponseEntity<?> listarProductosUsuario(@PathVariable(name="cedula") String cedula) {
+        try{
+            return ResponseEntity.status(200).body(productoServicio.listarProductosUsuario(cedula));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar-productos-estado-moderador/{codigoModerador}/{estado}")
+    public ResponseEntity<?> listarProductosEstadoModerador(@PathVariable(name="codigoModerador") Integer codigoModerador,
+                                                    @PathVariable(name="estado") Estado estado) {
+        try{
+            return ResponseEntity.status(200).body(productoServicio.listarProductosEstadoModerador(codigoModerador, estado));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar-productos-estado/{estado}")
+    public ResponseEntity<?> listarProductosEstado(@PathVariable(name="estado") boolean estado) {
+        try{
+            return ResponseEntity.status(200).body(productoServicio.listarProductosEstado(estado));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar-productos-nombre/{nombre}")
+    public ResponseEntity<?> listarProductosNombre(@PathVariable(name="nombre") String nombre) {
+        try{
+            return ResponseEntity.status(200).body(productoServicio.listarProductosNombre(nombre));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar-productos-precio/{precioMin}/{precioMax}")
+    public ResponseEntity<?> listarProductosEstadoModerador(@PathVariable(name="precioMin") double precioMin,
+                                                            @PathVariable(name="precioMax") double precioMax) {
+        try{
+            return ResponseEntity.status(200).body(productoServicio.listarProductosPrecio(precioMin, precioMax));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/listar-productos-favoritos/{cedulaUsuario}")
+    public ResponseEntity<?> listarProductosFavoritos(@PathVariable(name="cedulaUsuario") String cedulaUsuario) {
+        try{
+            return ResponseEntity.status(200).body(productoServicio.listarProductosFavoritos(cedulaUsuario));
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/crear-favorito")
+    public ResponseEntity<?> crearProductoFavorito(@RequestBody String cedulaUsuario, int codigoProducto){
+        try {
+            productoServicio.crearFavorito(cedulaUsuario, codigoProducto);
+            return ResponseEntity.status(200).body("¡Producto agregado a favoritos!");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/eliminar-favorito")
+    public ResponseEntity<?> eliminarProductoFavorito(@RequestBody String cedulaUsuario, int codigoProducto){
+        try {
+            productoServicio.eliminarFavorito(cedulaUsuario, codigoProducto);
+            return ResponseEntity.status(200).body("¡Producto eliminado de favoritos!");
+        } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }

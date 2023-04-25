@@ -19,7 +19,7 @@ public interface ProductoServicio {
 
     void actualizarProductoEstado(int codigoProducto, boolean estado) throws Exception;
 
-    int actualizarProductoCantidad(int codigoProducto, int unidades);
+    int actualizarProductoCantidad(int codigoProducto, int unidades) throws Exception;
 
     ProductoGetDTO obtenerProducto(int codigoProducto) throws Exception;
 

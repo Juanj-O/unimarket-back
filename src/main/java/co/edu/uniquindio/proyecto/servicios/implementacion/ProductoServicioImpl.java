@@ -7,6 +7,7 @@ import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.modelo.Usuario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.servicios.interfaces.CloudinaryServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.interfaces.UsuarioServicio;
 import lombok.AllArgsConstructor;
@@ -15,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -28,23 +27,16 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private CloudinaryServicio cloudinaryServicio;
+
 
     @Override
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
-        Producto producto = new Producto();
-        producto.setNombre(productoDTO.getNombre());
-        producto.setDescripcion(productoDTO.getDescripcion());
-        producto.setPrecio(productoDTO.getPrecio());
-        producto.setUnidades(productoDTO.getUnidades());
-        producto.setUsuario(usuarioServicio.obtener(productoDTO.getCedulaUsuario()));
-        producto.setImagen(productoDTO.getImagenes());
-        producto.setCategoria(productoDTO.getCategorias());
-        producto.setEstado(false);
-        producto.setFechaCreacion( LocalDateTime.now());
-        producto.setFechaLimite(LocalDateTime.now().plusDays(60));
+        Producto producto = convertirDTO(productoDTO);
 
-
+//        cloudinaryServicio.subirImagen(producto.getImagen(), "proyecto");
         return productoRepo.save(producto).getCodigo();
 
     }
@@ -71,8 +63,12 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int actualizarProductoCantidad(int codigoProducto, int unidades) {
-        return 0;
+    public int actualizarProductoCantidad(int codigoProducto, int unidades) throws Exception {
+        validarProductoExiste(codigoProducto);
+        Producto producto = obtener(codigoProducto);
+        producto.setUnidades(unidades);
+
+        return producto.getUnidades();
     }
 
     @Override
@@ -231,12 +227,21 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     private Producto convertirDTO(ProductoDTO productoDTO) throws Exception {
         Producto producto = new Producto();
-        producto.setEstado(false);
+        Map<String, String> imagen = new HashMap<>();
+        productoDTO.getImagenes().forEach( i ->
+                imagen.put(i.getKey(), i.getValue()))
+        ;
+
         producto.setNombre(productoDTO.getNombre());
         producto.setDescripcion(productoDTO.getDescripcion());
-        producto.setUnidades(productoDTO.getUnidades());
         producto.setPrecio(productoDTO.getPrecio());
+        producto.setUnidades(productoDTO.getUnidades());
         producto.setUsuario(usuarioServicio.obtener(productoDTO.getCedulaUsuario()));
+        producto.setImagen(imagen);
+        producto.setCategoria(productoDTO.getCategorias());
+        producto.setEstado(false);
+        producto.setFechaCreacion( LocalDateTime.now());
+        producto.setFechaLimite(LocalDateTime.now().plusDays(60));
         return producto;
     }
 
