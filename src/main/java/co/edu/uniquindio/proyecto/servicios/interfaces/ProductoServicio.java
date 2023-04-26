@@ -44,4 +44,6 @@ public interface ProductoServicio {
 
 
     int actualizarUnidades(int codigoProducto, int unidades) throws Exception;
+
+    List<Producto> listarProductosMasComprados();
 }

@@ -140,4 +140,10 @@ public class ProductoTest {
         List<ProductoGetDTO> listaProductos = productoServicio.listarProductosEstadoModerador(1, Estado.APROBADO);
         Assertions.assertEquals(1,listaProductos.size());
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarProductosMasComprados(){
+        Assertions.assertEquals(5 ,productoServicio.listarProductosMasComprados().size());
+    }
 }

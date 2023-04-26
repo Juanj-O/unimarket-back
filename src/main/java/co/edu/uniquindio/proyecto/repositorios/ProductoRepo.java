@@ -32,4 +32,7 @@ public interface ProductoRepo  extends JpaRepository<Producto, Integer> {
 
     @Query("select p from Producto p inner join LogPublicacion l on p.codigo = l.producto.codigo where l.moderador.codigo = :codigoModerador and l.estado = :estado")
     List<Producto> listarProductosEstadoModerador(int codigoModerador, Estado estado);
+
+    @Query("select p , sum(dc.cantidad) as cantidad from Producto p inner join DetalleCompra dc on p.codigo = dc.producto.codigo group by p.codigo order by cantidad desc ")
+    List<Producto> listarProductosMasComprados();
 }
