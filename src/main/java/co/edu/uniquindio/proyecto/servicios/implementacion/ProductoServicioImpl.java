@@ -269,4 +269,21 @@ public class ProductoServicioImpl implements ProductoServicio {
         producto.setUnidades(unidades);
         return producto.getUnidades();
     }
+
+    @Override
+    public List<Producto> listarProductosMasComprados(){
+
+        List<Producto> lista = productoRepo.listarProductosMasComprados();
+        List<Producto> top5 = new ArrayList<>();
+
+        if(lista.size() < 5){
+            top5 = lista;
+        }else{
+            for (int a = 0 ; a<5 ; a++){
+                top5.add(lista.get(a));
+            }
+        }
+System.out.println(top5);
+        return top5;
+    }
 }

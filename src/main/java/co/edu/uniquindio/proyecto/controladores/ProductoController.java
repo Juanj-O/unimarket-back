@@ -162,4 +162,13 @@ public class ProductoController {
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
+    @GetMapping("/obtener-productosMasVendidos")
+    public ResponseEntity<?> listarProductosMasVendidos(){
+        try {
+            return ResponseEntity.status(200).body(productoServicio.listarProductosMasComprados());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 }
