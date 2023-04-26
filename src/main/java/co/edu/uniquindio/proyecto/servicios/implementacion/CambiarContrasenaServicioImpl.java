@@ -21,10 +21,10 @@ public class CambiarContrasenaServicioImpl implements CambiarContrasenaServicio 
     @Override
     public void recuperarPassword(String email) throws Exception {
         System.out.println(email);
-        if (email != clienteRepo.buscarUsuario(email).getEmail()) {
+        if (clienteRepo.buscarUsuario(email).getEmail().isEmpty()) {
             System.out.println("entro 1");
 
-            if (email != moderadorRepo.findByCorreo(email).get().getCorreo()){
+            if (moderadorRepo.findByCorreo(email).get().getCorreo().isEmpty()){
                 System.out.println("entro 2");
 
                 throw new UsernameNotFoundException("El correo " + email + " no esta registrado");
@@ -32,7 +32,8 @@ public class CambiarContrasenaServicioImpl implements CambiarContrasenaServicio 
         }else {
             System.out.println("entro");
             emailServicio.enviarEmail("Cambio contraseña", "Ingresa al siguiente Link:"+
-                    "http://localhost:8081/api/cambiar-contrasena/cambiar/"+clienteRepo.buscarUsuario(email).getCedula(), email);
+                    "http://localhost:8081/doc/swagger-ui/index.html#/cambiar-contrasena-controller/cambiarContrasena/"
+                    +clienteRepo.buscarUsuario(email).getCedula(), email);
         }
     }
 

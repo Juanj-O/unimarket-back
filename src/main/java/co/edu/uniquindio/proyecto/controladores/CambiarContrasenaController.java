@@ -35,7 +35,7 @@ public class CambiarContrasenaController {
         try {
             cambiarContrasenaServicio.cambiarContrasena(cedula, cambiarContrasenaDTO);
             return ResponseEntity.status(200).body(new MensajeDTO<>(HttpStatus.CREATED,
-                    false, "Se envio un correo para recuperar la contraseña"));
+                    false, "Se cambio la contraseña correctamente"));
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }
