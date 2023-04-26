@@ -32,13 +32,12 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.cors();
-        http.authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers("/api/compras/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers( "/api/pqrs/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers( "/api/imagenes/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers("/api/usuario/**", "/api/comentario/**", "/api/imagenes/**", "/api/productos/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers( "/doc/**", "/swagger-ui/**", "/v3/api-docs/**"
-        ).permitAll();
+        http.authorizeHttpRequests().requestMatchers("/api/auth/**",
+                "/api/enviar-email/**", "/api/cambiar-contrasena/**").permitAll();
+        http.authorizeHttpRequests().requestMatchers("/api/compras/**", "/api/pqrs/**",
+                "/api/usuario/**", "/api/comentario/**", "/api/imagenes/**",
+                "/api/productos/**").hasAuthority("CLIENTE");
+        http.authorizeHttpRequests().requestMatchers( "/doc/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll();
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authenticationProvider(authenticationProvider);

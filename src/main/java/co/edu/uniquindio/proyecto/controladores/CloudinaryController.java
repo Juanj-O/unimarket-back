@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.controladores;
 import co.edu.uniquindio.proyecto.servicios.implementacion.CloudinaryServicioImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/imagenes")
+@SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor
 public class CloudinaryController {
     @Autowired

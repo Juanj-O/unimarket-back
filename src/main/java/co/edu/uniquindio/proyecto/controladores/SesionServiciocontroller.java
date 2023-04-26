@@ -21,7 +21,8 @@ public class SesionServiciocontroller {
     @Autowired
     private SesionServicioImpl sesionServicio;
 
-
+//  usuario  pedrorodriguez@hotmail.com  - 1234
+//  moderador  juan@juan.com  - 1234
     @PostMapping("/login")
     public ResponseEntity<?> loginCliente(@RequestBody SesionDTO sesionDTO){
         System.out.println(sesionDTO);

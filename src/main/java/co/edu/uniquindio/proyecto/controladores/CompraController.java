@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto.dto.CompraDTO;
 import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.implementacion.CompraServicioImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/compras")
+@SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor
 public class CompraController {
     @Autowired

@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.repositorios.PqrRepo;
 import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.implementacion.PqrServicioImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/pqrs")
+@SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor
 public class PQRSController {
 

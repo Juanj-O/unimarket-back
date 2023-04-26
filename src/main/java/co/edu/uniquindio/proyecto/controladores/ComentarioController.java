@@ -7,6 +7,7 @@ import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
 import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.implementacion.ComentarioSericioImpl;
 import co.edu.uniquindio.proyecto.servicios.implementacion.UsuarioServicioImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/comentario")
+@SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor
 public class ComentarioController {
 

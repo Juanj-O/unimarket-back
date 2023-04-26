@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.implementacion.CambiarContrasenaServicioImpl;
 import co.edu.uniquindio.proyecto.servicios.implementacion.EmailServicioImpl;
 import co.edu.uniquindio.proyecto.servicios.implementacion.UsuarioServicioImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class UsuarioController {
         }
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/actualizar-usuario")
     public ResponseEntity<?> actualizarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         try {
@@ -45,6 +47,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/obtener-usuario/{cedula}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> obtenerUsuarioCedula(@PathVariable(name = "cedula") String cedula){
         try {
             return ResponseEntity.status(200).body(usuarioServicio.obtenerUsuarioCodigo(cedula));
@@ -54,6 +57,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/eliminar-usuario/{cedula}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> eliminarUsuario(@PathVariable(name = "cedula") String cedula){
         try {
             usuarioServicio.eliminiarUsuario(cedula);
@@ -63,14 +67,4 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/enviar-email")
-    public ResponseEntity<?> recuperarPassword(@RequestBody String email){
-        try {
-            emailServicio.enviarEmail("enviar correo","correo" ,email);
-            return ResponseEntity.status(200).body(new MensajeDTO<>(HttpStatus.ACCEPTED,
-                    false, "Revisa tu correo"));
-        }catch (Exception e){
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-    }
 }

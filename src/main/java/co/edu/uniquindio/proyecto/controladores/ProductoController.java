@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
 import co.edu.uniquindio.proyecto.servicios.implementacion.ProductoServicioImpl;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("api/productos")
+@SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor
 public class ProductoController {
 

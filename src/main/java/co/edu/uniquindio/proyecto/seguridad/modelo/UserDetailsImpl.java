@@ -17,20 +17,22 @@ public class UserDetailsImpl implements UserDetails {
     private String username, password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static UserDetailsImpl build(Usuario user){
+    public static UserDetailsImpl build(Object user){
         List<GrantedAuthority> authorities = new ArrayList<>();
 
+        if(user instanceof Usuario){
+            Usuario usuario = (Usuario) user;
+            System.out.println(usuario);
             authorities.add( new SimpleGrantedAuthority("CLIENTE") );
-
-        return new UserDetailsImpl(user.getEmail(), user.getContrasena(), authorities);
-    }
-
-
-    public static UserDetailsImpl build(Moderador user){
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add( new SimpleGrantedAuthority("MODERADOR") );
-
-        return new UserDetailsImpl(user.getCorreo(), user.getContraseña(), authorities);
+            return new UserDetailsImpl(((Usuario) user).getEmail(),
+                    ((Usuario) user).getContrasena(), authorities);
+        }else if(user instanceof Moderador){
+            Moderador moderador = (Moderador) user;
+            authorities.add( new SimpleGrantedAuthority("MODERADOR") );
+            return new UserDetailsImpl(((Moderador) user).getCorreo(),
+                    ((Moderador) user).getContraseña(), authorities);
+        }
+        return null;
     }
 
 

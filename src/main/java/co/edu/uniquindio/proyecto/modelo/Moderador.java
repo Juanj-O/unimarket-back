@@ -27,7 +27,7 @@ public class Moderador implements Serializable {
     @Column(nullable = false, length = 100, unique = true)
     private String correo;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     private String contraseña;
 
 
