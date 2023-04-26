@@ -32,8 +32,14 @@ public class CloudinaryServicioImpl implements CloudinaryServicio {
 
     @Override
     public Map eliminarImagen(String idImagen) throws Exception {
-//        Map deleteParams = ObjectUtils.asMap("invalidate", true);
-        return cloudinary.uploader().destroy(idImagen, ObjectUtils.asMap());
+        Map deleteParams = ObjectUtils.asMap("invalidate", true);
+        try {
+            Map response = cloudinary.uploader().destroy(idImagen, deleteParams);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error al eliminar la imagen de Cloudinary.");
+        }
     }
 
     @Override

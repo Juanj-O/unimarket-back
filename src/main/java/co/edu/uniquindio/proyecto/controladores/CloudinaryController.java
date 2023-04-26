@@ -26,8 +26,8 @@ public class CloudinaryController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminarImagen(@RequestBody(name= "id") String id) throws Exception{
-        Map response = cloudinaryServicio.eliminarImagen(id);
+    public ResponseEntity<?> eliminarImagen(@RequestParam("publicId") String publicId) throws Exception{
+        Map response = cloudinaryServicio.eliminarImagen(publicId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
