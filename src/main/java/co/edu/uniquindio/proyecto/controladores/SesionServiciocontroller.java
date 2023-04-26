@@ -25,7 +25,6 @@ public class SesionServiciocontroller {
 //  moderador  juan@juan.com  - 1234
     @PostMapping("/login")
     public ResponseEntity<?> loginCliente(@RequestBody SesionDTO sesionDTO){
-        System.out.println(sesionDTO);
         try {
             return ResponseEntity.status(200).body(sesionServicio.login(sesionDTO));
         }catch (Exception e){

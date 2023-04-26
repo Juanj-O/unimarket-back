@@ -53,12 +53,12 @@ public class ProductoTest {
     }
 
     @Test
-    @Sql("classpath:dataset.sql")
+//    @Sql("classpath:dataset.sql")
     public void actualizarProductoTest() throws Exception {
 
         List<ImagenDTO> imagenes = new ArrayList<>();
-        List<Categoria> categorias = null;
-        ProductoDTO productoDTO = new ProductoDTO("NintendoTEST", "Gen 2.0", 25.000, 2, "1234", imagenes, categorias);
+        List<Categoria> categorias = new ArrayList<>();
+        ProductoDTO productoDTO = new ProductoDTO("NintendoTEST", "Gen 2.0", 25.000, 2, "4444", imagenes, categorias);
         productoServicio.actualizarProducto(1, productoDTO);
         Assertions.assertNotEquals("AUDIFONOS SAMSUNG 158-6685", productoServicio.obtenerProducto(1));
     }

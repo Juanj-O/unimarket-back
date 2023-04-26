@@ -22,7 +22,6 @@ public class UserDetailsImpl implements UserDetails {
 
         if(user instanceof Usuario){
             Usuario usuario = (Usuario) user;
-            System.out.println(usuario);
             authorities.add( new SimpleGrantedAuthority("CLIENTE") );
             return new UserDetailsImpl(((Usuario) user).getEmail(),
                     ((Usuario) user).getContrasena(), authorities);

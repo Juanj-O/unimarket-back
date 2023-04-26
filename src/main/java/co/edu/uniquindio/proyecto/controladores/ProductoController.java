@@ -4,11 +4,13 @@ import co.edu.uniquindio.proyecto.dto.ProductoDTO;
 import co.edu.uniquindio.proyecto.modelo.Categoria;
 import co.edu.uniquindio.proyecto.modelo.Estado;
 import co.edu.uniquindio.proyecto.modelo.Producto;
+import co.edu.uniquindio.proyecto.seguridad.modelo.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.servicios.implementacion.ProductoServicioImpl;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ProductoServicio;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -19,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 public class ProductoController {
 
     @Autowired
-    private ProductoServicio productoServicio;
+    private ProductoServicioImpl productoServicio;
 
     @PostMapping("/crear-producto")
     public ResponseEntity<?> crearProducto(@RequestBody ProductoDTO productoDTO){
@@ -41,9 +43,11 @@ public class ProductoController {
     }
 
     @PutMapping("/actualizar-producto")
-    public ResponseEntity<?> actualizarProducto(@RequestBody int codigoProducto, ProductoDTO productoDTO){
+    public ResponseEntity<?> actualizarProducto(@RequestBody ProductoDTO productoDTO, int codigoProducto){
+        System.out.println(productoDTO);
         try{
-            return ResponseEntity.status(200).body(productoServicio.actualizarProducto(codigoProducto, productoDTO));
+            productoServicio.actualizarProducto(codigoProducto, productoDTO);
+            return ResponseEntity.status(200).body(new MensajeDTO<>(HttpStatus.OK, false, "Producto actualizado!!"));
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }

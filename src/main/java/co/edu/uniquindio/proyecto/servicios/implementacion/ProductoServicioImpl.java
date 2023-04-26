@@ -35,8 +35,6 @@ public class ProductoServicioImpl implements ProductoServicio {
     public int crearProducto(ProductoDTO productoDTO) throws Exception {
 
         Producto producto = convertirDTO(productoDTO);
-
-//        cloudinaryServicio.subirImagen(producto.getImagen(), "proyecto");
         return productoRepo.save(producto).getCodigo();
 
     }
@@ -60,6 +58,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         validarProductoExiste(codigoProducto);
         Producto producto = obtener(codigoProducto);
         producto.setEstado(estado);
+        productoRepo.save(producto);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         validarProductoExiste(codigoProducto);
         Producto producto = obtener(codigoProducto);
         producto.setUnidades(unidades);
-
+        productoRepo.save(producto);
         return producto.getUnidades();
     }
 
@@ -207,6 +206,7 @@ public class ProductoServicioImpl implements ProductoServicio {
         Usuario usuario = usuarioServicio.obtener(cedulaUsuario);
         Producto producto = obtener(codigoProducto);
         usuario.getProductofavorito().add(producto);
+        
     }
 
     @Override
