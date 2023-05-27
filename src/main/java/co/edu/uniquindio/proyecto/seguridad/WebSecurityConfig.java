@@ -42,9 +42,6 @@ public class WebSecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authenticationProvider(authenticationProvider);
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        http.requiresChannel()
-                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-                .requiresSecure();
         return http.build();
     }
 }
