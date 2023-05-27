@@ -119,8 +119,8 @@ public class ProductoController {
         }
     }
 
-    @GetMapping("/listar-productos-nombre/{nombre}")
-    public ResponseEntity<?> listarProductosNombre(@PathVariable(name="nombre") String nombre) {
+    @GetMapping("/listar-productos-nombre")
+    public ResponseEntity<?> listarProductosNombre(@RequestBody String nombre) {
         try{
             return ResponseEntity.status(200).body(productoServicio.listarProductosNombre(nombre));
         }catch (Exception e){
@@ -171,6 +171,51 @@ public class ProductoController {
     public ResponseEntity<?> listarProductosMasVendidos(){
         try {
             return ResponseEntity.status(200).body(productoServicio.listarProductosMasComprados());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/obtener-valor-total/{mes}/{anio}")
+    public ResponseEntity<?> obtenerValorTotal(@PathVariable(name = "mes") int mes, @PathVariable(name="anio") int anio){
+        try {
+            return ResponseEntity.status(200).body(productoServicio.obtenerValorTotalDadoMesYAnio(mes, anio));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/obtener-productos-comprados-usuario/{cedula}")
+    public ResponseEntity<?> obtenerProductosCompradosUsuario(@PathVariable(name="cedula") String cedula){
+        try {
+            return ResponseEntity.status(200).body(productoServicio.listarProductosUsuarioCompra(cedula));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/obtener-producto-mas-caro/{categoria}")
+    public ResponseEntity<?> obtenerProductoMasCaro(@PathVariable(name="categoria") int categoria){
+        try {
+            return ResponseEntity.status(200).body(productoServicio.obtenerProductoMasCaroCategoria(categoria));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/obtener-producto-mas-barato/{categoria}")
+    public ResponseEntity<?> obtenerProductoMasBarato(@PathVariable(name="categoria") int categoria){
+        try {
+            return ResponseEntity.status(200).body(productoServicio.obtenerProductoMasBaratoCategoria(categoria));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/cantidad-producto-cada-categoria")
+    public ResponseEntity<?> obtenerProductoMasBarato(){
+        try {
+            return ResponseEntity.status(200).body(productoServicio.listarCantidadProductosCategoria());
         } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());
         }

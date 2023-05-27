@@ -155,7 +155,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<ProductoGetDTO> listarProductosNombre(String nombre) throws Exception {
         List<Producto> productos = productoRepo.listarProductosPorNombre(nombre);
-
+        System.out.println(productos);
         if (productos.isEmpty()){
             throw new Exception("El producto no se encuentra");
         }
@@ -283,7 +283,58 @@ public class ProductoServicioImpl implements ProductoServicio {
                 top5.add(lista.get(a));
             }
         }
-System.out.println(top5);
         return top5;
+    }
+
+    @Override
+    public Double obtenerValorTotalDadoMesYAnio(int mes, int anio) throws Exception{
+        Double valorTotal = productoRepo.obtenerValorTotalDadoMesYAnio(mes, anio);
+
+        if(valorTotal == 0){
+            throw new Exception("No se encontraron ventas en la fecha dada.");
+        }
+
+        return valorTotal;
+    }
+
+    @Override
+    public List<Producto> listarProductosUsuarioCompra(String cedulaUsuario) throws Exception{
+        List<Producto> listaProductos = productoRepo.listarProductosUsuarioCompra(cedulaUsuario);
+
+        if(listaProductos.isEmpty()){
+            throw new Exception("No se encuentran productos comprados con esta cedula: "+cedulaUsuario);
+        }
+        return listaProductos;
+    }
+
+    @Override
+    public Double obtenerProductoMasCaroCategoria(int categoria) throws Exception {
+        Double productoMasCaro = productoRepo.obtenerProductoMasCaroCategoria(categoria);
+
+        if(productoMasCaro == 0){
+            throw new Exception("No se encuentran productos con esta categoria: "+categoria);
+        }
+
+        return productoMasCaro;
+    }
+
+    @Override
+    public Double obtenerProductoMasBaratoCategoria(int categoria) throws Exception {
+        Double productoMasBarato = productoRepo.obtenerProductoMasBaratoCategoria(categoria);
+
+        if(productoMasBarato == 0){
+            throw new Exception("No se encuentran productos con esta categoria: "+categoria);
+        }
+
+        return productoMasBarato;
+    }
+
+    @Override
+    public List<Object[]> listarCantidadProductosCategoria(){
+
+        List<Object[]>lista = productoRepo.listarCantidadProductosCategorias();
+        lista.forEach(System.out::println);
+
+        return lista;
     }
 }

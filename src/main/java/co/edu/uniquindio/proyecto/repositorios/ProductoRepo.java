@@ -35,4 +35,22 @@ public interface ProductoRepo  extends JpaRepository<Producto, Integer> {
 
     @Query("select p , sum(dc.cantidad) as cantidad from Producto p inner join DetalleCompra dc on p.codigo = dc.producto.codigo group by p.codigo order by cantidad desc ")
     List<Producto> listarProductosMasComprados();
+
+    @Query("select sum(c.valorTotal) from Compra c where month(c.fecha) = :mes and year(c.fecha) = :anio")
+    Double obtenerValorTotalDadoMesYAnio(int mes, int anio);
+
+    @Query("select distinct c from Compra c join DetalleCompra dc on c.codigo = dc.compra.codigo join Producto p on dc.producto.codigo = p.codigo where c.usuario.cedula = :cedulaUsuario")
+    List<Producto> listarProductosUsuarioCompra(String cedulaUsuario);
+
+    @Query("select max(p.precio) from Producto p join DetalleCompra dc on dc.producto.codigo = p.codigo where p.categoria = :categoria order by p.precio")
+    Double obtenerProductoMasCaroCategoria(int categoria);
+
+    @Query("select min(p.precio) from Producto p join DetalleCompra dc on dc.producto.codigo = p.codigo where p.categoria = :categoria order by p.precio")
+    Double obtenerProductoMasBaratoCategoria(int categoria);
+
+    @Query ("select c, count(p) from Producto p join p.categoria c group by c")
+    List<Object[]> listarCantidadProductosCategorias();
+
+
+
 }

@@ -46,4 +46,15 @@ public interface ProductoServicio {
     int actualizarUnidades(int codigoProducto, int unidades) throws Exception;
 
     List<Producto> listarProductosMasComprados();
+
+    List<Producto> listarProductosUsuarioCompra(String cedulaUsuario) throws Exception;
+
+    Double obtenerValorTotalDadoMesYAnio(int mes, int anio) throws Exception;
+
+    Double obtenerProductoMasCaroCategoria(int categoria) throws Exception;
+
+    Double obtenerProductoMasBaratoCategoria(int categoria) throws Exception;
+
+    List<Object[]> listarCantidadProductosCategoria();
+
 }
