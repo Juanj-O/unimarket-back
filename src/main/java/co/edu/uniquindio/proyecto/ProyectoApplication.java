@@ -14,11 +14,13 @@ public class ProyectoApplication {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
+
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("https://unimarket-back-production.up.railway.app/").allowedMethods("*").allowedHeaders("*");
+                registry.addMapping("/**").allowedOrigins("https://unimarket-back-production.up.railway.app/", "http://unimarket-back-production.up.railway.app/").allowedMethods("*").allowedHeaders("*").allowCredentials(true);;
             }
+
         };
     }
 }
