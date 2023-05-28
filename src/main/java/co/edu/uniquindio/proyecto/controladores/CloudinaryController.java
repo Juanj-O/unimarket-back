@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(maxAge = 3600)
 @RequestMapping("api/imagenes")
 @SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor

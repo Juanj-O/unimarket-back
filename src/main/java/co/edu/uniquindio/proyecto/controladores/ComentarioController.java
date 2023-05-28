@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(maxAge = 3600)
 @RequestMapping("api/comentario")
 @SecurityRequirement(name = "bearerAuth")
 @AllArgsConstructor
