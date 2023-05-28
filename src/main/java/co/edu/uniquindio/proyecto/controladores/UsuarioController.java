@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping("api/usuario")
 @AllArgsConstructor
 public class UsuarioController {

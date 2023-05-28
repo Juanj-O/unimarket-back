@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 @RequestMapping("api/enviar-email")
 @AllArgsConstructor
 public class EnviarEmailController {
