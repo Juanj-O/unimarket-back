@@ -19,8 +19,11 @@ public class ProyectoApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                        .allowedOrigins("http://unimarket-back-production.up.railway.app", "http://unimarket-back-production.up.railway.app/api/")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("header1", "header2", "header3")
+                        .exposedHeaders("header1", "header2")
+                        .allowCredentials(true).maxAge(3600);
             }
 
         };
