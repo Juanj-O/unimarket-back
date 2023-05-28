@@ -7,13 +7,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import co.edu.uniquindio.proyecto.seguridad.config.JwtAuthenticationEntryPoint;
 import co.edu.uniquindio.proyecto.seguridad.config.JwtAuthenticationFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -34,9 +30,9 @@ public class WebSecurityConfig {
         http.cors();
         http.authorizeHttpRequests().requestMatchers("/api/auth/**",
                 "/api/enviar-email/**", "/api/cambiar-contrasena/**").permitAll();
-//        http.authorizeHttpRequests().requestMatchers("/api/compras/**", "/api/pqrs/**",
-//                "/api/usuario/**", "/api/comentario/**", "/api/imagenes/**",
-//                "/api/productos/**").hasAuthority("CLIENTE");
+        http.authorizeHttpRequests().requestMatchers("/api/compras/**", "/api/pqrs/**",
+                "/api/usuario/**", "/api/comentario/**", "/api/imagenes/**",
+                "/api/productos/**").hasAuthority("CLIENTE");
         http.authorizeHttpRequests().requestMatchers( "/doc/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll();
         http.authorizeHttpRequests().anyRequest().permitAll();
         http.exceptionHandling().authenticationEntryPoint(jwtEntryPoint);
